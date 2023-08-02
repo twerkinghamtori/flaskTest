@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>농수산업 대출추천 ai</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" >
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<style>
+  .carousel-item img {
+    min-width: 500px;
+    width: 100vw;
+    height: 80vh; /* 이미지 높이 고정 */
+    object-fit: cover; /* 이미지 비율 유지 */
+  }
+  .jumbo {
+	  position: absolute;
+	  top: 40%;
+	  left: 30%;
+	  transform: translate(-50%, -50%);
+	  text-align: centel;
+	  z-index: 1;
+	}
+	.jumbo h3, .jumbo h5 {
+	  color: white;
+	  text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
+	  margin: 0;
+    font-family: 'Do Hyeon', sans-serif;
+	}
+  .carousel-control-prev,
+  .carousel-control-next {
+    background-color: rgba(255, 255, 255, 0.5); /* 버튼의 배경색을 투명 검은색으로 설정합니다 */
+    border: none; 
+    opacity: 0.7; 
+    width: 60px; 
+    height: 60px; 
+    position: absolute; 
+    top: 50%; 
+    transform: translateY(-50%); 
+    z-index: 1;
+  }
+  .carousel-control-prev {left : 2.5%}
+  .carousel-control-next {right : 2.5%}
+  .carousel-control-prev:hover,
+  .carousel-control-next:hover {opacity: 1;}
+  .w3-quarter h2 {font-weight : bold;}
+	.w3-quarter {
+		height:330px;
+		width : 22%;
+		margin : 10px;
+		box-shadow: 0px 4px 8.5px 0 rgba(0,0,0,0.4);
+		display : flex;
+		flex-direction: column;
+		transition: transform 0.2s ease;
+    text-align: left;
+	}
+  .w3-quarter:hover {
+    transform: scale(1.1);
+    z-index: 9;
+  }
+  a{text-decoration: none;}
+  a:hover{color: gray;}
+</style>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('input[name="loan"]').change(function() {
+            const selectedValue = $('input[name="loan"]:checked').val();
+
+            const loanYDiv = $('#loanYDiv');
+
+            if (selectedValue === "1") {
+                loanYDiv.show(); 
+            } else {
+                loanYDiv.hide(); 
+            }
+        });
+        $('input[name="certificate"]').change(function() {
+        	if ($('input[name="certificate"]:checked').val() === "1") {
+                $('#certificateYDiv').show();
+            } else {
+                $('#certificateYDiv').hide();
+            }
+        })
+    });
+    function input_check(f){
+    	if(f.name.value.trim() == "" ){
+    	    alert("성함을 입력해주세요.")
+    	    f.name.focus();
+    	    return false;
+    	}
+    	if(f.age.value.trim() == "" ){
+    	    alert("연령을 입력해주세요.")
+    	    f.age.focus();
+    	    return false;
+    	}
+    	if(f.age.value.trim()<=0 || f.age.value.trim() >=120) {
+    		alert("1~120 사이의 연령을 입력해주세요.")
+    	    f.age.focus();
+    	    return false;
+    	}
+    	const checkboxes = document.querySelectorAll('input[name="family"]:checked');
+    	if (checkboxes.length === 0) {
+            alert("가족구성원을 선택해주세요.");
+            document.getElementById('family1').focus();
+            return false;
+        }
+    	const radios = document.querySelectorAll('input[name="job"]');
+    	let checkedRadio = null;
+    	for (const radio of radios) {
+            if (radio.checked) {
+                checkedRadio = radio;
+                break;
+            }
+        }
+    	if (!checkedRadio) {
+            alert("종사업을 선택해주세요.");
+            document.getElementById('job1').focus();
+            return false;
+        }
+    	const loans = document.querySelectorAll('input[name="loan"]');
+    	let checkedLoan = null;
+    	for (const radio of loans) {
+            if (radio.checked) {
+            	checkedLoan = radio;
+                break;
+            }
+        }
+    	if (!checkedLoan) {
+            alert("기존 대출 여부를 선택해주세요.");
+            document.getElementById('loanY').focus();
+            return false;
+        }
+    	
+    	const loanY = document.getElementById("loanY");
+    	if(loanY.checked && f.loan_name.value.trim() == "") {
+    		alert("상품명을 입력해주세요.")
+    	    f.loan_name.focus();
+    	    return false;
+    	}
+    	if(loanY.checked && f.loan_time.value.trim() == "") {
+    		alert("상환 잔여 개월수를 입력해주세요.")
+    	    f.loan_time.focus();
+    	    return false;
+    	}
+    	if(loanY.checked && f.loan_time.value < 0) {
+    		alert("잔여 개월수를 0 이상 입력해주세요.")
+    	    f.loan_time.focus();
+    	    return false;
+    	}
+    	if(loanY.checked && f.loan_rate.value.trim() == "") {
+    		alert("현재 이자율을 입력해주세요.")
+    	    f.loan_rate.focus();
+    	    return false;
+    	}
+    	if(f.asset.value.trim() == "") {
+    		alert("자산 규모를 입력해주세요.")
+    	    f.asset.focus();
+    	    return false;
+    	}
+    	if(f.asset.value.trim()<0) {
+    		alert("0 이상의 자산규모를 입력해주세요.")
+    	    f.asset.focus();
+    	    return false;
+    	}
+    	const certificates = document.querySelectorAll('input[name="certificate"]');
+    	let checkedCertificate = null;
+    	for (const radio of certificates) {
+            if (radio.checked) {
+            	checkedCertificate = radio;
+                break;
+            }
+        }
+    	if (!checkedCertificate) {
+            alert("공인인증서 사용 여부를 선택해주세요.");
+            document.getElementById('loanY').focus();
+            return false;
+        }
+    	const certificateY = document.getElementById("certificateY");
+    	const untacts = document.querySelectorAll('input[name="untact"]');
+    	let checkedUntact = null;
+    	for (const radio of untacts) {
+            if (radio.checked) {
+            	checkedUntact = radio;
+                break;
+            }
+        }
+    	if(certificateY.checked && !checkedUntact) {
+    		alert("비대면 거래 희망여부를 선택해주세요.");
+            document.getElementById('untactY').focus();
+            return false;
+    	}
+    	return true;
+    }
+</script>
+</head>
+<body>
+  
+  <!-- 상단 Nav -->
+  <nav class="navbar navbar-expand-sm" style="height:100px;">
+    <img src="{{ url_for('static', filename='img/kb_logo.png') }}" style="width:200px; height:40px; margin-left:50px;">
+    <div class="container-fluid" style="margin-left:300px;">        
+        <p style="margin-top: 20px; font-size:30px;"><a href="/">농수산업자 대출 추천 시스템</a></p>
+    </div>
+  </nav>
+​
+  <div style="min-height: 100vh;">
+    <!-- 사이트매시 바디 시작-->
+    <div class="container">
+        <form action="loading" method="get" name="f" onsubmit="return input_check(this)">
+            <h1 id="title" style="text-align:center;">정보 입력</h1>          
+              <div class="container form">
+                <!-- 오른쪽 아이디/비번/닉네임 입력구역-->
+                <div style="margin-left:400px; margin-right:400px;">
+                  <!-- 성함 -->
+                  <div id="cor1" class="form-group mb-4">
+                    <label class="mb-1" for="name">성함</label>
+                      <input type="text" class="form-control" id="name" name="name" 
+                        placeholder="성함을 입력해주세요.">
+                  </div>
+                  <!-- 연령-->
+                  <div id="cor1" class="form-group mb-4">
+                    <label class="mb-1" for="age">연령</label>
+                      <input type="number" class="form-control" id="age" name="age" 
+                        placeholder="숫자만 입력해주세요.">
+                  </div>
+                  <!-- 가족구성원 -->
+                  <div id="cor2" class="form-group mb-4">
+                    <label class="mb-1" for="family">가족구성원 형태 <span>(중복 체크 가능)</span></label>
+                    <br>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="family" id="family1" value="1">
+                        <label class="form-check-label" for="family1">부모</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="family" id="family2" value="2">
+                        <label class="form-check-label" for="family2">배우자</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="family" id="family3" value="3">
+                        <label class="form-check-label" for="family3">조부모</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="family" id="family4" value="4">
+                        <label class="form-check-label" for="family4">자식</label>
+                      </div>
+                  </div>
+                  <!-- 종사직 -->
+                  <div id="cor3" class="form-group mt-1 mb-4">
+                    <label class="mb-1" for="job">종사업</label>
+                    <br>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="job" id="job1" value="1">
+                        <label class="form-check-label" for="job1">농업</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="job" id="job2" value="2">
+                        <label class="form-check-label" for="job2">수산업</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="job" id="job3" value="3">
+                        <label class="form-check-label" for="job3">축산업</label>
+                    </div>
+                  </div>
+                  <!-- 기존 대출 여부 -->
+                  <div id="cor3" class="form-group mt-1 mb-4">
+                    <label class="mb-1" for="loan">기존 대출 여부</label>
+                    <br>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="loan" id="loanY" value="1">
+                        <label class="form-check-label" for="loanY">기존 대출 내역 있음</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="loan" id="loanN" value="2">
+                        <label class="form-check-label" for="loanN">기존 대출 내역 없음</label>
+                    </div>
+                    <div style="display:none" id="loanYDiv">
+                        <!-- 상품이름 -->
+                    <div id="cor1" class="form-group mb-1 mt-3">
+                        <label class="mb-1" for="loan_name">상품명</label>
+                        <input type="text" class="form-control" id="loan_name" name="loan_name" 
+                            placeholder="상품 이름을 입력해주세요.">
+                    </div>
+                    <!-- 상환 잔여 기간 -->
+                    <div id="cor1" class="form-group mb-1 mt-3">
+                        <label class="mb-1" for="loan_time">상환 잔여 개월수</label>
+                        <input type="number" class="form-control" id="loan_time" name="loan_time" 
+                            placeholder="상환 잔여 기간을 개월수로 입력해주세요.">
+                    </div>
+                    <!-- 현재 이자율 -->
+                    <div id="cor1" class="form-group mb-1 mt-3">
+                        <label class="mb-1" for="loan_rate">현재 이자율</label>
+                        <input type="text" class="form-control" id="loan_rate" name="loan_rate" 
+                            placeholder="현재 이자율을 %(퍼센트)를 제외하고 입력해주세요." pattern="^(100(\.0{1,2})?|\d{1,2}(\.\d{1,2})?)$"
+                            title="0부터 100 사이의 숫자를 입력하세요. (소수점아래 두자리까지)">
+                    </div>
+                    </div>
+                    
+                  </div>
+                  <!-- 자산 규모 -->
+                  <div id="cor1" class="form-group mb-4">
+                    <label class="mb-1" for="asset">자산 규모</label>
+                      <input type="number" class="form-control" id="asset" name="asset" 
+                        placeholder="대략적인 자산 규모를 숫자만 입력해주세요.">
+                  </div>
+                <!-- 공인 인증서 유무 -->
+                  <div id="cor3" class="form-group mt-1 mb-4">
+                    <label class="mb-1" for="certificate">공인인증서 사용 여부</label>
+                    <br>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="certificate" id="certificateY" value="1">
+                        <label class="form-check-label" for="certificateY">사용함</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="certificate" id="certificateN" value="2">
+                        <label class="form-check-label" for="certificateN">사용 안함</label>
+                    </div>
+                  </div>
+                <div id="certificateYDiv" style="display:none;">
+                    <label class="mb-1" for="untact">비대면 거래 희망 유무</label>
+                    <br>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="untact" id="untactY" value="1">
+                        <label class="form-check-label" for="untactY">희망함</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="untact" id="untactN" value="2">
+                        <label class="form-check-label" for="untactN">희망하지 않음</label>
+                    </div>
+                </div>      
+              </div>
+          
+              <!-- 회원가입 / 초기화 -->
+              <div class="container mt-3" align="center">
+                <button type="submit" class="btn btn-dark" id="join">결과보기</button>
+              </div>
+          
+            </form>
+    </div>
+    <!-- 사이트매시 바디 끝 -->
+  </div>
+​
+  <hr>
+​
+  <!-- 푸터 -->
+  <footer class="w3-container w3-padding-16 w3-center">  
+    <div class="w3-xlarge w3-padding-32 fw-bold">
+      <h5><i class="fa fa-map-marker"></i> kb ai challenge (김민혁, 강수빈)</h5>
+      <h5><i class="fa fa-envelope"></i> mhkim0929@naver.com | zxc2289@naver.com</h5>
+      <h5><i class="fa fa-phone"></i> 010-9916-0646 | 010-4489-1534</h5>
+    </div>
+  </footer>
+​
+  
+​
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+​
+</body>
+</html>
