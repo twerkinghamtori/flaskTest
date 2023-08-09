@@ -9,10 +9,14 @@ def main():
 @application.route("/info")
 def info():
     return render_template("info.html")
-
+    
 @application.route("/loading")
 def loading():
     return render_template("loading.html")
+
+@application.route("/report")
+def report():
+    return render_template("report.html")
 
 if __name__ == "__main__" : 
     application.run(host="0.0.0.0", port=9900)

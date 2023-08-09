@@ -13,57 +13,6 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 <style>
-  .carousel-item img {
-    min-width: 500px;
-    width: 100vw;
-    height: 80vh; /* 이미지 높이 고정 */
-    object-fit: cover; /* 이미지 비율 유지 */
-  }
-  .jumbo {
-	  position: absolute;
-	  top: 40%;
-	  left: 30%;
-	  transform: translate(-50%, -50%);
-	  text-align: centel;
-	  z-index: 1;
-	}
-	.jumbo h3, .jumbo h5 {
-	  color: white;
-	  text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
-	  margin: 0;
-    font-family: 'Do Hyeon', sans-serif;
-	}
-  .carousel-control-prev,
-  .carousel-control-next {
-    background-color: rgba(255, 255, 255, 0.5); /* 버튼의 배경색을 투명 검은색으로 설정합니다 */
-    border: none; 
-    opacity: 0.7; 
-    width: 60px; 
-    height: 60px; 
-    position: absolute; 
-    top: 50%; 
-    transform: translateY(-50%); 
-    z-index: 1;
-  }
-  .carousel-control-prev {left : 2.5%}
-  .carousel-control-next {right : 2.5%}
-  .carousel-control-prev:hover,
-  .carousel-control-next:hover {opacity: 1;}
-  .w3-quarter h2 {font-weight : bold;}
-	.w3-quarter {
-		height:330px;
-		width : 22%;
-		margin : 10px;
-		box-shadow: 0px 4px 8.5px 0 rgba(0,0,0,0.4);
-		display : flex;
-		flex-direction: column;
-		transition: transform 0.2s ease;
-    text-align: left;
-	}
-  .w3-quarter:hover {
-    transform: scale(1.1);
-    z-index: 9;
-  }
   a{text-decoration: none;}
   a:hover{color: gray;}
   .loading {
@@ -89,9 +38,8 @@
 <body>
   
   <!-- 상단 Nav -->
-  <nav class="navbar navbar-expand-sm" style="height:100px;">
-    <img src="{{ url_for('static', filename='img/kb_logo.png') }}"  style="width:200px; height:40px; margin-left:50px;">
-    <div class="container-fluid" style="margin-left:300px;">        
+  <nav class="navbar navbar-expand-sm" style="height:100px;text-align:center;">
+    <div class="container" style="margin-left:40%; position:absolute;">        
         <p style="margin-top: 20px; font-size:30px;"><a href="/">농수산업자 대출 추천 시스템</a></p>
     </div>
   </nav>

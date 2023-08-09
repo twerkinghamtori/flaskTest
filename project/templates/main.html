@@ -49,53 +49,15 @@
   .carousel-control-next {right : 2.5%}
   .carousel-control-prev:hover,
   .carousel-control-next:hover {opacity: 1;}
-  .w3-quarter h2 {font-weight : bold;}
-	.w3-quarter {
-		height:330px;
-		width : 22%;
-		margin : 10px;
-		box-shadow: 0px 4px 8.5px 0 rgba(0,0,0,0.4);
-		display : flex;
-		flex-direction: column;
-		transition: transform 0.2s ease;
-    text-align: left;
-	}
-  .w3-quarter:hover {
-    transform: scale(1.1);
-    z-index: 9;
-  }
   a{text-decoration: none;}
   a:hover{color: gray;}
 </style>
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('input[name="loan"]').change(function() {
-            const selectedValue = $('input[name="loan"]:checked').val();
-
-            const loanYDiv = $('#loanYDiv');
-
-            if (selectedValue === "1") {
-                loanYDiv.show(); 
-            } else {
-                loanYDiv.hide(); 
-            }
-        });
-        $('input[name="certificate"]').change(function() {
-            if ($('input[name="certificate"]:checked').val() === "1") {
-                $('#certificateYDiv').show();
-            } else {
-                $('#certificateYDiv').hide();
-            }
-        })
-    });
-</script>
 </head>
 <body>
   
   <!-- 상단 Nav -->
-  <nav class="navbar navbar-expand-sm" style="height:100px;">
-    <img src="{{ url_for('static', filename='img/kb_logo.png') }}" style="width:200px; height:40px; margin-left:50px;">
-    <div class="container-fluid" style="margin-left:300px;">        
+  <nav class="navbar navbar-expand-sm" style="height:100px;text-align:center;">
+    <div class="container" style="margin-left:40%; position:absolute;">        
         <p style="margin-top: 20px; font-size:30px;"><a href="/">농수산업자 대출 추천 시스템</a></p>
     </div>
   </nav>
