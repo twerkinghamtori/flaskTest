@@ -11,12 +11,13 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 <style>
-  a{text-decoration: none;}
-  a:hover{color: gray;}
+a{text-decoration: none;}
+a:hover{color: gray;}
   /*****************CHAT BODY *******************/
-  .chat-body .answer.left {padding: 0 0 0 58px;text-align: left;float: left;}
+.chat-body .answer.left {padding: 0 0 0 58px;text-align: left;float: left;}
 .chat-body .answer {position: relative;max-width: 600px;overflow: hidden;clear: both;}
 .chat-body .answer.left .avatar {left: 0;}
 .chat-body .answer .avatar {bottom: 36px;}
@@ -65,6 +66,7 @@
         }
         return true
     }
+    //위도,경도 기반 지도 출력
     function search(level, lat, lon) {
     
         var infowindow = new kakao.maps.InfoWindow({zIndex:1});
@@ -73,7 +75,7 @@
         var mapOption = {
                 center: new kakao.maps.LatLng(lat, lon), 
                 level: level
-            };  
+        };  
         
         var map = new kakao.maps.Map(mapContainer, mapOption); 
         
@@ -112,8 +114,7 @@
         });
     }
     
-    currentLocation();
-    
+    currentLocation();    
     
 </script>
 </head>
@@ -215,11 +216,6 @@
       <h5><i class="fa fa-phone"></i> 010-9916-0646 | 010-4489-1534</h5>
     </div>
   </footer>
-​
-  
-​
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-​
+  ​
 </body>
 </html>

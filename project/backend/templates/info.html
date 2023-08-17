@@ -11,42 +11,43 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 <style>
-  a{text-decoration: none;}
-  a:hover{color: gray;}
+	a{text-decoration: none;}
+	a:hover{color: gray;}
      /* 로딩 화면 스타일링 */
- #loading-screen {
-	width: 100%;
-	height: 100%;
-	top: 0;
-	left: 0;
-	position: fixed;
-	display: block;
-	opacity: 0.8;
-	background: white;
-	z-index: 99;
-	text-align: center;
-}
+	#loading-screen {
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		position: fixed;
+		display: block;
+		opacity: 0.8;
+		background: white;
+		z-index: 99;
+		text-align: center;
+	}
 
-#loading-screen > img {
-	position: absolute;
-	top: 40%;
-	left: 47%;
-	z-index: 100;
-}
+	#loading-screen > img {
+		position: absolute;
+		top: 40%;
+		left: 47%;
+		z-index: 100;
+	}
 
-#loading-screen > p {
-	position: absolute;
-	top: 50%;
-	left: 33%;
-	z-index: 100;
-}
+	#loading-screen > p {
+		position: absolute;
+		top: 50%;
+		left: 33%;
+		z-index: 100;
+	}
 </style>
 <script type="text/javascript">
 	
     $(document).ready(function() {
-    	//check 여부에 따라 div 열고 닫음
+    	//기존대출여부 체크 시 실행(div 열고 닫음)
         $('input[name="loan"]').change(function() {
             const selectedValue = $('input[name="loan"]:checked').val();
 
@@ -58,6 +59,7 @@
                 loanYDiv.hide(); 
             }
         });
+      	//공인인증서 여부 체크 시 실행(div 열고 닫음)
         $('input[name="certificate"]').change(function() {
         	if ($('input[name="certificate"]:checked').val() === "y") {
                 $('#certificateYDiv').show();
@@ -66,7 +68,8 @@
             }
         })
     });
-  	//input 유효성 검사
+    
+  	//input 유효성 검사(form submit시 실행)
     function input_check(f){
     	if(f.name.value.trim() == "" ){
     	    alert("성함을 입력해주세요.")
@@ -186,7 +189,7 @@
         <p style="margin-top: 20px; font-size:30px;"><a href="/">고르다</a></p>
     </div>
   </nav>
-​
+
   <div style="min-height: 100vh;">
     <!-- 바디 시작-->
     <div class="container">
@@ -323,19 +326,21 @@
                 <button type="submit" class="btn btn-dark">결과보기</button>
               </div>
           </div>
-            </form>
+        </form>
+            
          <!-- 로딩화면 표시 시작 -->
-            <script type="text/javascript">
-         		// 폼이 제출될 때 로딩 화면을 표시합니다
-            	$("form[name='f']").on("submit", function () {
-                	$("#loading-screen").show();
-            	});
+        <script type="text/javascript">
+        	// 폼이 제출시 로딩화면 표시
+           	$("form[name='f']").on("submit", function () {
+                $("#loading-screen").show();
+            });
 		</script>
         <div id="loading-screen" style="display:none;">
 				<img src="{{ url_for('static', filename='img/icons8-spinner.gif') }}" alt="loading">
 				<p style="color:gray; font-size:30px;">잠시만 기다려주세요. 리포트를 생성중입니다.</p>
 		</div> 
 		<!-- 로딩화면 표시 끝 -->
+		
     </div>
     <!-- 바디 끝 -->
   </div>
@@ -353,8 +358,7 @@
 ​
   
 ​
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 ​
 </body>
 </html>
