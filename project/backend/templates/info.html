@@ -225,7 +225,7 @@
                   </div>
                   <!-- 가족구성원 -->
                   <div class="form-group mb-4">
-                    <label class="mb-1" for="family">가족구성원 형태 <span>(중복 체크 가능)</span></label>
+                    <label class="mb-1" for="family">가족구성원(부양가족) 형태 <span>(중복 체크 가능)</span></label>
                     <br>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="checkbox" name="family" id="family1" value="부모">
@@ -315,7 +315,7 @@
                   <div class="form-group mt-1 mb-4">
                     <label class="mb-1" for="else">기타 특이사항</label>
                     <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
-                    	name="others" placeholder="기타 특이사항을 입력해주세요. 예) 귀농인에게 맞는 대출상품 추천해주세요."></textarea>
+                    	name="others" placeholder="기타 특이사항을 입력해주세요. 예) 스마트팜을 운영하는 청년농부, 농자재 구입을 위한 자금마련"></textarea>
                   </div>
               </div>
           
@@ -324,6 +324,7 @@
               </div>
           </div>
             </form>
+         <!-- 로딩화면 표시 시작 -->
             <script type="text/javascript">
          		// 폼이 제출될 때 로딩 화면을 표시합니다
             	$("form[name='f']").on("submit", function () {
@@ -334,6 +335,7 @@
 				<img src="{{ url_for('static', filename='img/icons8-spinner.gif') }}" alt="loading">
 				<p style="color:gray; font-size:30px;">잠시만 기다려주세요. 리포트를 생성중입니다.</p>
 		</div> 
+		<!-- 로딩화면 표시 끝 -->
     </div>
     <!-- 바디 끝 -->
   </div>

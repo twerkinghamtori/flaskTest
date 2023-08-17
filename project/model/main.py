@@ -10,10 +10,12 @@ import requests
 from bs4 import BeautifulSoup
 
 ###제출 시에는 api키는 삭제###
-openai.api_key = "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"
+openai.api_key = "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"
 
 ###쿼리인데 이 부분은 사이트랑 연결할 때 자동화해야함###
-query_sentence = "희망대출금액 40000000 자산 23000000 수산업자"
+query_sentence1 = "희망대출금액 40000000 자산 23000000인"
+query_sentence2 = "무주택자에 부양가족이 3명인"
+query_sentence3 = "청년 수산업자"
 job="수산업자"
 
 ###파일경로###
@@ -46,32 +48,38 @@ def query_vectorize(query_sentence):
     return query_embedding
 
 # 문장 유사도 계산 및 상품별 유사도 합산
-def similar_count(query_sentence):
-    query_embedding = query_vectorize(query_sentence)
+def similar_count(query_sentence1,query_sentence2,query_sentence3):
+    query_embedding1 = query_vectorize(query_sentence1)
+    query_embedding2 = query_vectorize(query_sentence2)
+    query_embedding3 = query_vectorize(query_sentence3)
     tray = {}
     for idx, embedding in loaded_embeddings.items():
-        similarity = cosine_similarity(query_embedding, embedding)
+        similarity1 = cosine_similarity(query_embedding1, embedding)
+        similarity2 = cosine_similarity(query_embedding2, embedding)
+        similarity3 = cosine_similarity(query_embedding3, embedding)
         index = df.iloc[idx]['상품']
         if index in tray:
-            tray[index] += similarity
+            tray[index] += similarity1
+            tray[index] += similarity2
+            tray[index] += similarity3
         else:
-            tray[index] = similarity
+            tray[index] = similarity1
     sorted_tray = sorted(tray.items(), key=lambda x: x[1], reverse=True)
     return sorted_tray
 
-def top_three(query_sentence):
-    result=similar_count(query_sentence)
+def top_three(query_sentence1,query_sentence2,query_sentence3):
+    sorted_tray=similar_count(query_sentence1,query_sentence2,query_sentence3)
     rec=[]
     for i in range(3):
-        rec.append(result[i][0])
+        rec.append(sorted_tray[i][0])
     return rec
 
 def isnan(number,column):
     is_nan = pd.isna(description.loc[number, column])
     return is_nan
 
-def prompt(query_sentence):
-    rec = top_three(query_sentence)
+def prompt(query_sentence1,query_sentence2,query_sentence3):
+    rec = top_three(query_sentence1,query_sentence2,query_sentence3)
     contexts={}
     titles=[]
     for index in rec:
@@ -114,8 +122,8 @@ def prompt(query_sentence):
         titles.append(title)
     return contexts, titles
 
-def generate_report(query_sentence):
-    contexts, titles = prompt(query_sentence)
+def generate_report(query_sentence1,query_sentence2,query_sentence3):
+    contexts, titles = prompt(query_sentence1,query_sentence2,query_sentence3)
     results=[]
     for context in contexts:
         try:
@@ -178,9 +186,9 @@ def generate_newslist(job):
 
 ###sample###
 ###간단한 결과 확인용 함수입니다! 제출땐 삭제해서 제출예정###
-def sample_result(query_sentence,job):
+def sample_result(query_sentence1,query_sentence2,query_sentence3,job):
     ###리포트 뽑는 부분###
-    results,titles = generate_report(query_sentence)
+    results,titles = generate_report(query_sentence1,query_sentence2,query_sentence3)
     print(f"1순위 추천 상품: {titles[0]}")
     print(f"리포트: {results[0]}")
     print(f"2순위 추천 상품: {titles[1]}")
@@ -193,4 +201,4 @@ def sample_result(query_sentence,job):
         print(news_title[i])
         print(news_link[i])
         
-sample_result(query_sentence,job)
+sample_result(query_sentence1,query_sentence2,query_sentence3,job)
