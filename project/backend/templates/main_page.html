@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>고르다</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" >
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<style>
+  .carousel-item img {
+    min-width: 500px;
+    width: 100vw;
+    height: 80vh; /* 이미지 높이 고정 */
+    object-fit: cover; /* 이미지 비율 유지 */
+  }
+  .jumbo {
+	  position: absolute;
+	  top: 40%;
+	  left: 30%;
+	  transform: translate(-50%, -50%);
+	  text-align: centel;
+	  z-index: 1;
+	}
+	.jumbo h3, .jumbo h4 {
+	  color: white;
+	  text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
+	  margin: 0;
+    font-family: 'Do Hyeon', sans-serif;
+	}
+  .carousel-control-prev,
+  .carousel-control-next {
+    background-color: rgba(255, 255, 255, 0.5);
+    border: none; 
+    opacity: 0.7; 
+    width: 60px; 
+    height: 60px; 
+    position: absolute; 
+    top: 50%; 
+    transform: translateY(-50%); 
+    z-index: 1;
+  }
+  .carousel-control-prev {left : 2.5%}
+  .carousel-control-next {right : 2.5%}
+  .carousel-control-prev:hover,
+  .carousel-control-next:hover {opacity: 1;}
+  a{text-decoration: none;}
+  a:hover{color: gray;}
+</style>
+</head>
+<body>
+  
+  <!-- 상단 Nav -->
+  <nav class="navbar navbar-expand-sm" style="height:100px;text-align:center;">
+    <div class="container" style="margin-left:47%; position:absolute;">        
+        <p style="margin-top: 20px; font-size:30px;"><a href="/">고르다</a></p>
+    </div>
+  </nav>
+​
+  <div>
+    <!-- 바디 시작-->
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" style="margin-top: 30px;">
+      <div class="carousel-inner">
+      
+        <div class="carousel-item active d-flex align-items-center">
+          <div class="jumbo text-center" style="margin-left:300px; margin-top:100px;">
+            <h3 class="display-4 fw-bold mb-4">농림어업자를 위한 대출상품 추천</h3>
+            <h4 class="mb-4">
+              나에게 맞는 대출상품 추천받기
+              <br>
+              <br>
+              <a class="btn btn-warning btn-lg" href="info" role="button">지금 바로 추천받기</a>
+            </h4>
+          </div>
+          <img src="{{ url_for('static', filename='img/mainImg.jpg') }}" class="d-block w-100" alt="">
+        </div>
+        
+      </div>
+    </div>
+    <!-- 바디 끝 -->
+  </div>
+​
+  <hr>
+​
+  <!-- 푸터 -->
+  <footer class="w3-container w3-padding-16 w3-center">  
+    <div class="w3-xlarge w3-padding-32 fw-bold">
+      <h5><i class="fa fa-map-marker"></i> kb ai challenge (김민혁, 강수빈)</h5>
+      <h5><i class="fa fa-envelope"></i> mhkim0929@naver.com | zxc2289@naver.com</h5>
+      <h5><i class="fa fa-phone"></i> 010-9916-0646 | 010-4489-1534</h5>
+    </div>
+  </footer>
+​
+  
+​
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+​
+</body>
+</html>

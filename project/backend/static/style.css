@@ -1,0 +1,59 @@
+*, .container *, footer * { font-family: 'Do Hyeon', sans-serif;}
+.navbar-nav .nav-item {
+   margin-right: 30px; /* 원하는 간격으로 조정 */
+ }
+ #logoSearch{
+   display: flex;
+   align-items: center;
+ }
+ .input-group{
+   width: 400px;
+ }
+ #logo{
+   width: 250px; height: 60px;
+ }
+ #search {
+   height: 40px;
+   border-color: red; 
+   border-width: 3px; 
+ }
+ #header{
+   display: flex;
+   flex-direction: column;
+ }
+ #prodMenu .nav-link {
+   border-bottom: 2px solid transparent;
+   transition: all 0.3s;
+   position: relative;
+ }
+​
+ #prodMenu .nav-link::after {
+   content: "";
+   position: absolute;
+   bottom: -2px;
+   left: 50%;
+   width: 0;
+   height: 5px;
+   background-color: red;
+   transition: all 0.3s;
+   transform: translateX(-50%);
+ }
+​
+ #prodMenu .nav-link.active::after,
+ #prodMenu .nav-link:hover::after {
+   width: 100%;
+   transform: translateX(-50%);
+ }
+ .custom-divider {
+   height: 1px;
+   background-color: #ddd;
+   box-shadow: 0 2px 3px rgba(0, 0, 0, 1);
+ }
+​
+ #button-addon2 {
+   font-family: sans-serif;
+ }
+
+ .navbar{
+  background-color : rgb(255, 204, 0);
+ }
