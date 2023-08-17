@@ -15,8 +15,8 @@ openai.api_key = "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"
 ###쿼리인데 이 부분은 사이트랑 연결할 때 자동화해야함###
 query_sentence1 = "희망대출금액 40000000 자산 23000000인"
 query_sentence2 = "무주택자에 부양가족이 3명인"
-query_sentence3 = "청년 수산업자"
-job="수산업자"
+query_sentence3 = "농기계 구입자금이 필요한 농업인"
+job="농업인"
 
 ###파일경로###
 csv_file_path_cleaned_data = 'D:\springstudy\kb_ai_challenge\project\model\data.csv'
