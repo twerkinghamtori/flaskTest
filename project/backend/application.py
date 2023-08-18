@@ -10,7 +10,7 @@ from project.model import main
 
 application = Flask(__name__)
 
-openai.api_key = "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"
+openai.api_key = 
 
 #메인 페이지
 @application.route("/")
