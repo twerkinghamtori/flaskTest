@@ -10,7 +10,7 @@ import requests
 from bs4 import BeautifulSoup
 
 ###제출 시에는 api키는 삭제###
-openai.api_key = "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"
+openai.api_key = 
 
 ###쿼리인데 이 부분은 사이트랑 연결할 때 자동화해야함###
 query_sentence1 = "희망대출금액 40000000 자산 23000000인"
