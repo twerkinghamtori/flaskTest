@@ -10,7 +10,8 @@ from project.model import main
 
 application = Flask(__name__)
 
-openai.api_key = 
+#################################입력해야 실행 가능####################################
+openai.api_key = "<API KEY>"
 
 #메인 페이지
 @application.route("/")
@@ -52,20 +53,8 @@ def report():
         
         job_query = f"{job}인"       
         
-        #출력부분(나중에 지워야함)
-        original_stdout = sys.stdout  # 기존 stdout 저장
-        sys.stdout = sys.__stdout__  # stdout을 원래의 값으로 설정
-
-        print("query_sentence1:", query_sentence1)  # 터미널에 출력
-        print("query_sentence2:", query_sentence2)  
-        print("query_sentence3:", query_sentence3)  
-        
-
-        sys.stdout = original_stdout  # stdout을 원래 값으로 복원
-        print("job_query:", job_query)
-        
         # AI 모델 함수 실행
-        results, titles = main.generate_report(query_sentence1,query_sentence2, query_sentence3)
+        results, titles = main.generate_report(query_sentence1, query_sentence2, query_sentence3)
 
         # 기사 추천 결과 생성
         news_title, news_link = main.generate_newslist(job_query)
